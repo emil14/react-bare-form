@@ -14,7 +14,7 @@ const Form = props => {
     } = child
     const body =
       Element === 'select'
-        ? options.map(optionProps => <option {...optionProps}>{optionProps.label}</option>)
+        ? options.map(optionProps => <option {...optionProps} key={optionProps.value}>{optionProps.label}</option>)
         : text
     return (
       <React.Fragment key={name}>
