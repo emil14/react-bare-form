@@ -1,7 +1,8 @@
-import React from 'react' // eslint-disable-line no-unused-vars
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const Form = props => {
-  const { content = [], ...rootProps } = props
+  const { content, ...rootProps } = props
   const children = content.map(child => {
     const {
       element: Element,
@@ -30,6 +31,13 @@ const Form = props => {
     )
   })
   return <form {...rootProps}>{children}</form>
+}
+
+Form.defaultProps = {
+  content: [],
+}
+Form.propTypes = {
+  content: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default Form
