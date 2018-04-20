@@ -1,7 +1,7 @@
 import React from 'react' // eslint-disable-line no-unused-vars
 
 const Form = props => {
-  const { rootProps, content, className } = props
+  const { content = [], ...rootProps } = props
   const children = content.map(child => {
     const {
       element: Element,
@@ -9,6 +9,7 @@ const Form = props => {
       options = [],
       label: labelText,
       text,
+      className = 'form',
       ...elementProps
     } = child
     const body =
@@ -16,12 +17,11 @@ const Form = props => {
         ? options.map(optionProps => <option {...optionProps}>{optionProps.label}</option>)
         : text
     return (
-      <React.Fragment>
+      <React.Fragment key={name}>
         {labelText && <label for={name}>{labelText}</label>}
         <Element
           name={name}
           className={`${className}__${Element} ${className}__${Element}--${name}`}
-          key={name}
           {...elementProps}
         >
           {body}
@@ -29,7 +29,7 @@ const Form = props => {
       </React.Fragment>
     )
   })
-  return <form {...rootProps} className='form'>{children}</form>
+  return <form {...rootProps}>{children}</form>
 }
 
 export default Form
