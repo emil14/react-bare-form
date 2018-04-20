@@ -4,8 +4,9 @@
   "description": "Render bare HTML-forms from JavaScript objects with React",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src --out-dir build"
+    "build": "babel src --out-dir build",
+    "test": "jest",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,18 @@
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1"
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest": "^22.4.3",
+    "react-test-renderer": "^16.3.2"
+  },
+  "peerDependencies": {
+    "react": "^16.3.2"
   },
   "browserslist": "last 2 versions"
 }
