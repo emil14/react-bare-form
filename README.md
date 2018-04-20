@@ -53,3 +53,10 @@ const myComponent = () => {
   <input name="myInput" type="password" />
 </form>
 ```
+## Contributing guide
+```bash
+git clone git@github.com:emil14/react-bare-form.git
+npm i
+npm run test
+npm run build
+```
