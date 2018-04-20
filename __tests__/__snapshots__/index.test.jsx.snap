@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form renders its children 1`] = `
+<form
+  name="myForm"
+>
+  <select
+    className="form__select form__select--mySelect"
+    name="mySelect"
+  >
+    <option
+      label="First option"
+      value={0}
+    >
+      First option
+    </option>
+    <option
+      label="Second option"
+      value={1}
+    >
+      Second option
+    </option>
+  </select>
+  <label
+    for="myInput"
+  >
+    Password:
+  </label>
+  <input
+    className="form__input form__input--myInput"
+    name="myInput"
+    type="password"
+  />
+</form>
+`;
+
+exports[`Form renders with attributes 1`] = `
+<form
+  className="bare-form"
+  id="myForm"
+  name="myForm"
+/>
+`;
