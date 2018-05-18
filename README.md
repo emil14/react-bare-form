@@ -2,6 +2,7 @@
 > Render bare HTML-form from JavaScript object with React!
 
 [![jest](https://facebook.github.io/jest/img/jest-badge.svg)](https://github.com/facebook/jest)
+[![Build Status](https://travis-ci.com/emil14/react-bare-form.svg?branch=master)](https://travis-ci.com/emil14/react-bare-form)
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
 ## Getting started
