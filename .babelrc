@@ -1,6 +1,1 @@
-{
-  "presets": ["env", "react"],
-  "plugins": [
-    "transform-object-rest-spread"
-  ]
-}
+{ "presets": ["env", "react", "stage-0"] }
