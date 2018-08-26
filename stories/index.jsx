@@ -5,25 +5,19 @@ import Form, { stateManager as formStateManager } from '../src/index'
 import './style.css'
 
 class Wrapper extends React.PureComponent {
-  state = object('Wrapper state', {
+  state = object('State wrapper', {
     id: 'myId',
     className: 'myClass',
     style: { padding: '10px' },
-    onChange: updatedEl => this.setState(formStateManager(updatedEl)),
+    onChange: this.updateFormState,
     content: [
       {
         name: 'mySelect',
         element: 'select',
         onChange: () => console.log('mySelect was changed!'),
         options: [
-          {
-            label: 'First option',
-            value: 0,
-          },
-          {
-            label: 'Second option',
-            value: 1,
-          }
+          { label: 'First option', value: 0 },
+          { label: 'Second option', value: 1 }
         ]
       },
       {
@@ -39,9 +33,17 @@ class Wrapper extends React.PureComponent {
         type: 'text',
       }
     ],
-    model: { mySelect: '', myInput: '', myTextInput: '' }
-  })
-  render = () => <Form {...this.state} />
+    initialState: { mySelect: '', myInput: '', myTextInput: '' },
+  });
+
+  updateFormState = updatedEl => {
+    this.setState(prevState => {
+      const newFormState = { ...prevState.formState, ...updatedEl };
+      return { formState: newFormState };
+    });
+  }
+
+  render = () => <Form {...this.state} />;
 }
 
 storiesOf('Storybook Knobs', module)

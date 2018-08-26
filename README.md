@@ -5,45 +5,32 @@
 [![Build Status](https://travis-ci.com/emil14/react-bare-form.svg?branch=master)](https://travis-ci.com/emil14/react-bare-form)
 
 [![JavaScript Style Guide](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
+
 ## Getting started
+
 ### WIP: Installation
+
 ```bash
 npm install --save react-bare-form
 ```
+
 ### Usage example
-#### Source
+
+code:
 ```jsx
-import Form, { stateManager as formStateManager } from '../src/index'
+import Form from 'react-bare-form';
 
 class MyComponent extends React.PureComponent {
   state = {
-    // any props you like
-    id: 'myId',
-    className: 'myClass',
-    style: { padding: '10px' },
-    // component specific
-    onChange: updatedEl => this.setState(formStateManager(updatedEl)),
-    /* `formStateManager` is just a small function that help you avoid boilerplate:
-      updatedEl => prevState => {
-        const newModel = { ...prevState.model, ...updatedEl }
-        return { model: newModel }
-      }
-    */
-    content: [
+    formContent: [
       {
-        name: 'mySelect',
         element: 'select',
-        onChange: () => console.log('mySelect was changed!'),
+        name: 'mySelect',
         options: [
-          {
-            label: 'First option',
-            value: 0
-          },
-          {
-            label: 'Second option',
-            value: 1
-          }
-        ]
+          { label: 'First option', value: 0 },
+          { label: 'Second option', value: 1 }
+        ],
+        onChange: () => console.log('mySelect was changed!'),
       },
       {
         name: 'myInput',
@@ -58,12 +45,37 @@ class MyComponent extends React.PureComponent {
         type: 'text'
       }
     ],
-    model: { mySelect: '', myInput: '', myTextInput: '' }
+    formState: { mySelect: '', myInput: '', myTextInput: '' }
+  };
+
+  updateFormState = updatedEl => {
+    this.setState(prevState => {
+      const newFormState = { ...prevState.formState, ...updatedEl };
+      return { formState: newFormState };
+    });
   }
-  render = () => <Form {...this.state} />
+
+  render() {
+    const { formContent, formState } = this.props;
+    const anyPropsYouWant = {
+      id: 'myId',
+      className: 'myClass',
+      style: { padding: '10px' }
+    };
+
+    return (
+      <Form
+        content={formContent}
+        initialState={formState}
+        onChange={this.updateFormState}
+        {...anyPropsYouWant}
+      />
+    );
+  }
 }
 ```
-#### Result
+
+result:
 ```html
 <form class="my-form">
   <select class="my-form__select my-form__select--my">
@@ -76,6 +88,7 @@ class MyComponent extends React.PureComponent {
   <input name="myTextInput" type="text" />
 </form>
 ```
+
 ## Contributing guide
 ```bash
 git clone git@github.com:emil14/react-bare-form.git

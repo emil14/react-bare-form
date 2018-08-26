@@ -1,7 +1,7 @@
 {
   "name": "react-bare-form",
-  "version": "0.0.1",
-  "description": "Render bare HTML-form from JavaScript object with React!",
+  "version": "0.1.0",
+  "description": "Render bare HTML-form from JavaScript objects with React!",
   "main": "src/index.js",
   "scripts": {
     "build": "babel src --out-dir build",
@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/emil14/react-bare-form.git"
   },
-  "author": "",
+  "author": "Emil Valeev <emil.musician@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/emil14/react-bare-form/issues"
