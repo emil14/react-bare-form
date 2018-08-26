@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 class Form extends React.PureComponent {
   static propTypes = {
+    initialState: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+    onChange: PropTypes.func,
     content: PropTypes.arrayOf(PropTypes.shape({
       name: PropTypes.string.isRequired,
       element: PropTypes.string.isRequired,
@@ -11,9 +13,13 @@ class Form extends React.PureComponent {
         label: PropTypes.string,
         value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       })),
-    })).isRequired,
-    initialState: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
+    })),
   };
+
+  static defaultProps = {
+    initialState: {},
+    content: [],
+  }
 
   handleChange = (key, value, handler) => {
     const update = { [key]: value };
@@ -24,18 +30,23 @@ class Form extends React.PureComponent {
   mapContentToChildren() {
     const { content, initialState } = this.props;
 
-    return content.map(child => {
-      const {
-        element: Element,
+    return content.map(({
+      element: Element,
+      name,
+      options = [],
+      label: labelText,
+      text,
+      onChange,
+      className = 'form',
+      ...customProps,
+    }) => {
+      const props = {
         name,
-        options = [],
-        label: labelText,
-        text,
-        onChange: onChangeLocal,
-        className = 'form',
-        ...elementProps
-      } = child;
-
+        value: initialState[name],
+        onChange: e => this.handleChange(name, e.target.value, onChange),
+        className: `${className}__${Element} ${className}__${Element}--${name}`,
+        ...customProps,
+      };
       const body = Element === 'select'
         ? options.map(({ label, value }) => <option key={value}>{label}</option>)
         : text;
@@ -43,17 +54,9 @@ class Form extends React.PureComponent {
       return (
         <React.Fragment key={name}>
           {labelText && <label htmlFor={name}>{labelText}</label>}
-          <Element
-            name={name}
-            value={initialState[name]}
-            onChange={e => this.handleChange(name, e.target.value, onChangeLocal)}
-            className={`${className}__${Element} ${className}__${Element}--${name}`}
-            {...elementProps}
-          >
-            {body}
-          </Element>
+          <Element {...props}>{body}</Element>
         </React.Fragment>
-      )
+      );
     });
   }
 
